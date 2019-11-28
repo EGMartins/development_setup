@@ -89,8 +89,11 @@ nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
 " Mapping irb
 nnoremap <leader>irb :VtrOpenRunner {'orientation': 'h', 'percentage': 50, 'cmd': 'irb'}<cr>
+"nnoremap <leader>pr :VtrOpenRunner {'orientation': 'v', 'percentage': 20, 'cmd': 'pronto\ run\ --exit-code\ -c\ origin/master'}<cr>
+nnoremap <leader>pr :VtrOpenRunner {'orientation': 'v', 'percentage': 20, 'cmd': 'docker\ run\ --rm\ -v\ pronto_modules:/app/node_modules\ -v\ $(pwd):/app\ -w\ /app\ dmitryrck/ruby:ready\ pronto\ run\ --exit-code\ -c\ origin/master'}<cr>
+nnoremap <leader>pr4 :VtrOpenRunner {'orientation': 'v', 'percentage': 20, 'cmd': 'docker\ run\ --rm\ -v\ pronto_modules:/app/node_modules\ -v\ $(pwd):/app\ -w\ /app\ dmitryrck/ruby:ready\ pronto\ run\ --exit-code\ -c\ origin/master4'}<cr>
 
-let g:rspec_command = "VtrSendCommandToRunner! rspec {spec}"
+let g:rspec_command = "VtrSendCommandToRunner! bundle exec rspec {spec}"
 
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
@@ -103,9 +106,11 @@ set colorcolumn=120
 let g:vimrubocop_keymap = 0
 nmap <Leader>r :RuboCop<CR>
 
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
+let g:airline_powerline_fonts = 1
+
+"python3 from powerline.vim import setup as powerline_setup
+"python3 powerline_setup()
+"python3 del powerline_setup
 
 " Set Gdiff to split vertically as default behavior
 set diffopt+=vertical
@@ -121,7 +126,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-endwise'
 Plugin 'ervandew/supertab'
 Plugin 'ngmy/vim-rubocop'
-
+Plugin 'vim-airline/vim-airline'
 
 source ~/.vim/custom/gui.vim
 source ~/.vim/custom/nerdtree.vim
